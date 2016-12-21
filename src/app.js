@@ -9,14 +9,13 @@ import LoginForm from './components/LoginForm';
 class App extends Component{
 	componentWillMount() {
 		const config = {
-		  apiKey: 'AIzaSyDnW2kCHgBpMXPlZ9Hfx7wMZbK170WZQaI',
-		  authDomain: 'buatdian-50b58.firebaseapp.com',
-		  databaseURL: 'https://buatdian-50b58.firebaseio.com',
-		  storageBucket: 'buatdian-50b58.appspot.com',
-		  messagingSenderId: '636508705542'
+			apiKey: "AIzaSyDnW2kCHgBpMXPlZ9Hfx7wMZbK170WZQaI",
+			authDomain: "buatdian-50b58.firebaseapp.com",
+			databaseURL: "https://buatdian-50b58.firebaseio.com",
+			storageBucket: "buatdian-50b58.appspot.com",
+			messagingSenderId: "636508705542"
 		};
 		firebase.initializeApp(config);
-
 	}
 
 	render() {
