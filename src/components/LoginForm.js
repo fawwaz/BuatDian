@@ -33,6 +33,8 @@ class LoginForm extends Component{
 		);
 	}
 
+
+
 	render() {
 		return(
 			<View>
@@ -50,6 +52,8 @@ class LoginForm extends Component{
 
 				<Text>{this.props.error}</Text>
 
+				<Text>{this.props.user.email}</Text>
+
 				{this.renderButton()}
 			</View>
 		);
@@ -57,8 +61,8 @@ class LoginForm extends Component{
 }
 
 const mapStateToProps = ({ auth }) => {
-	const { email, password, error, loading } = auth;
-	return { email, password, error, loading };
+	const { email, password, error, loading, user } = auth;
+	return { email, password, error, loading, user };
 };
 
 export default connect(mapStateToProps, { 
