@@ -3,6 +3,7 @@ import App from './src/app';
 
 AppRegistry.registerComponent('shoutem', () => App);
 
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native

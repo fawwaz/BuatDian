@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, loginAnonymously } from '../actions';
 import { Spinner } from './commons';
 
 class LoginForm extends Component{
@@ -20,16 +20,27 @@ class LoginForm extends Component{
 		this.props.loginUser({ email, password });
 	}
 
+	onButtonGuestPress() {
+		this.props.loginAnonymously();
+	}
+
 	renderButton() {
 		if (this.props.loading) {
 			return <Spinner size="large" />;
 		}
 
 		return(
-			<Button 
-				title="Login/Register" 
-				onPress={this.onButtonPress.bind(this)}
-			/>
+			<View>
+				<Button
+					style={{marginBottom: 10}} 
+					title="Login/Register" 
+					onPress={this.onButtonPress.bind(this)}
+				/>
+				<Button 
+					title="Sign In as Guest" 
+					onPress={this.onButtonGuestPress.bind(this)}
+				/>
+			</View>
 		);
 	}
 
@@ -52,8 +63,6 @@ class LoginForm extends Component{
 
 				<Text>{this.props.error}</Text>
 
-				<Text>{this.props.user.email}</Text>
-
 				{this.renderButton()}
 			</View>
 		);
@@ -68,5 +77,6 @@ const mapStateToProps = ({ auth }) => {
 export default connect(mapStateToProps, { 
 	emailChanged, 
 	passwordChanged, 
-	loginUser
+	loginUser,
+	loginAnonymously
 })(LoginForm);

@@ -1,18 +1,53 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { ListView, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import { transactionFetch } from '../actions';
+import ListItem from './ListItem';
 
 class TransactionList extends Component{
+	componentWillMount() {
+		this.props.transactionFetch();
+
+		this.createDataSource(this.props);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.createDataSource(nextProps);
+	}
+
+	createDataSource({ transactions }) {
+		const ds = new ListView.DataSource({
+			rowHasChanged: (r1, r2) => r1 !== r2
+		});
+
+		this.datasource = ds.cloneWithRows(transactions);
+	}
+
+	renderRow(transaction) {
+		return <ListItem transaction={transaction} />
+	}
+
 	render() {
+		console.log(this.props);
 		return(
-			<View>
-				<Text>Hai ini belanjaan 1</Text>
-				<Text>Hai ini belanjaan 2</Text>
-				<Text>Hai ini belanjaan 3</Text>
-				<Text>Hai ini belanjaan 4</Text>
-				<Text>Hai ini belanjaan 5</Text>
-			</View>
+			<ListView 
+				enableEmptySections
+				dataSource={this.dataSource}
+				renderRow={this.renderRow}
+			/>
 		);
 	}
 }
 
-export default TransactionList;
+const mapStateToProps = state => {
+	const transactions = _.map(state.transactions, (val, uid) => {
+		return { ...val, uid};
+	});
+
+	return { transactions };
+}
+
+export default connect(mapStateToProps, {
+	transactionFetch
+})(TransactionList);
