@@ -33,7 +33,7 @@ class TransactionList extends Component{
 		return(
 			<ListView 
 				enableEmptySections
-				dataSource={this.dataSource}
+				dataSource={this.datasource}
 				renderRow={this.renderRow}
 			/>
 		);

@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
-import { emailChanged, passwordChanged, loginUser, loginAnonymously } from '../actions';
+import { emailChanged, passwordChanged, loginUser, loginAnonymously, productFetch } from '../actions';
 import { Spinner } from './commons';
 
 class LoginForm extends Component{
+	componentWillMount() {
+		this.props.productFetch();
+	}
+
 	onUsernameChange(text) {
 		this.props.emailChanged(text);
 	}
@@ -78,5 +82,6 @@ export default connect(mapStateToProps, {
 	emailChanged, 
 	passwordChanged, 
 	loginUser,
-	loginAnonymously
+	loginAnonymously,
+	productFetch
 })(LoginForm);
