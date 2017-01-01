@@ -7,7 +7,7 @@ import {
 const INITIAL_STATE = {
 	nama_barang: '',
 	kode_barang: '',
-	jumlah_barang: 0
+	jumlah_barang: 1
 };
 
 export default (state = INITIAL_STATE, action) => {

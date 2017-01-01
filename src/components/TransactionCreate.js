@@ -9,7 +9,6 @@ class TransactionCreate extends Component{
 
 	onSubmitButtonPressed() {
 		const { nama_barang, kode_barang, jumlah_barang } = this.props;
-
 		this.props.transactionCreate({nama_barang, kode_barang, jumlah_barang});
 	}
 

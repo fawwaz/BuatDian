@@ -1,11 +1,21 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
+import { connect } from 'react-redux';
+import { productFetch } from '../actions';
 
 class Scanner extends Component{
+
+  componentWillMount() {
+    this.props.productFetch();
+  }
+
 	onBarCodeRead(barcode) {
-		Actions.transactionCreate({ type:'refresh', kd_barang: barcode.data });
+    const barang = _.find( this.props.products, { 'uid': barcode.data });
+
+		Actions.transactionCreate({ type:'refresh', kode_brg: barang.uid, nama_brg:barang.nama_barang });
 	}
 
 	render() {
@@ -45,4 +55,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Scanner;
+const mapStateToProps = (state) => {
+  const products = _.map(state.products, (val, uid) => {
+    return {...val, uid}
+  });
+  
+
+  return { products };
+}
+
+export default connect(mapStateToProps, {
+  productFetch
+})(Scanner);
