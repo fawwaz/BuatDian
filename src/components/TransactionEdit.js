@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Button, FormLabel, FormInput } from 'react-native-elements';
 import { transactionUpdate, transactionSave, transactionDelete } from '../actions';
 import TransactionForm from './TransactionForm';
 import { Confirm } from  './commons';
@@ -38,15 +38,24 @@ class TransactionEdit extends Component{
 	render() {
 		return (
 			<View>
-				<TransactionForm />
+				<Text>{this.props.nama_barang}</Text>
+				<FormLabel>Jumlah</FormLabel>
+				<FormInput 
+					onChangeText={value => this.props.transactionUpdate({ prop:'jumlah_barang', value })}
+					value={this.props.jumlah_barang}
+					keyboardType='numeric'
+				/>
+
 				<Button
+					backgroundColor='#19aa31'
 					onPress={this.onSubmitButtonPressed.bind(this)}
-				   	icon={{name: 'cart-plus', type:'font-awesome'}}
+				   	icon={{name: 'edit', type:'font-awesome'}}
 				   	title='Simpan' />
 
 				<Button
+					backgroundColor='#ba251d'
 					onPress={this.onDeletePressed.bind(this)}
-				   	icon={{name: 'cart-plus', type:'font-awesome'}}
+				   	icon={{name: 'remove', type:'font-awesome'}}
 				   	title='Hapus' />
 
 				<Confirm

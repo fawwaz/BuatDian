@@ -17,6 +17,7 @@ class TransactionCreate extends Component{
 			<View>
 				<TransactionForm {...this.props}/>
 				<Button
+					backgroundColor='#19aa31'
 					onPress={this.onSubmitButtonPressed.bind(this)}
 				   	icon={{name: 'cart-plus', type:'font-awesome'}}
 				   	title='Simpan' />

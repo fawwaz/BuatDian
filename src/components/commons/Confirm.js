@@ -15,10 +15,12 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
 			<View style={containerStyle}>
 				<Text style={textStyle}>{children}</Text>
 				<Button
+					backgroundColor='#ba251d'
 					onPress={onAccept}
 				   	title='Ya' 
 				/>
 				<Button 
+					backgroundColor='#19aa31'
 					onPress={onDecline}
 					title='Tidak'
 				/>
