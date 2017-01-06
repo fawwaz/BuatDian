@@ -5,6 +5,7 @@ import TransactionList from './components/TransactionList';
 import TransactionCreate from './components/TransactionCreate';
 import TransactionEdit from './components/TransactionEdit';
 import Scanner from './components/Scanner';
+import CheckoutScreen from './components/CheckoutScreen';
 
 const RouterComponent = () => {
 	return (
@@ -20,7 +21,6 @@ const RouterComponent = () => {
 					title="Previous Order List" 
 					rightTitle="Add" 
 					onRight={ () => Actions.transactionCreate() }
-					initial
 				/>
 
 				<Scene 
@@ -38,6 +38,13 @@ const RouterComponent = () => {
 					key="scanner"
 					component={Scanner}
 					title="Ambil Gambar"
+				/>
+
+				<Scene
+					key="checkout"
+					component={CheckoutScreen}
+					title="Tunjukan ke Kasir !"
+					initial
 				/>
 			</Scene>
 			

@@ -16,9 +16,10 @@ export const transactionUpdate = ({ prop, value }) => {
 };
 
 export const transactionCreate = ({ nama_barang, kode_barang, jumlah_barang }) => {
-	console.log({ nama_barang, kode_barang, jumlah_barang });
+	const { currentUser } = firebase.auth();
+	
 	return (dispatch) => {
-		firebase.database().ref('bucket/bucket1/')
+		firebase.database().ref(`bucket/${currentUser.uid}`)
 			.push({ nama_barang, kode_barang, jumlah_barang })
 			.then( () => {
 				console.log("tes");
@@ -31,8 +32,10 @@ export const transactionCreate = ({ nama_barang, kode_barang, jumlah_barang }) =
 }
 
 export const transactionFetch = () => {
+	const { currentUser } = firebase.auth();
+
 	return (dispatch) => {
-		firebase.database().ref('bucket/bucket1/')
+		firebase.database().ref(`bucket/${currentUser.uid}`)
 		.on('value', snapshot => {
 			dispatch({
 				type: TRANSACTION_FETCH_SUCCESS,
@@ -43,8 +46,10 @@ export const transactionFetch = () => {
 }
 
 export const transactionSave = ({ nama_barang, kode_barang, jumlah_barang, uid}) => {
+	const { currentUser } = firebase.auth();
+
 	return (dispatch) => {
-		firebase.database().ref(`bucket/bucket1/${uid}`)
+		firebase.database().ref(`bucket/${currentUser.uid}/${uid}`)
 		.set({ nama_barang, kode_barang, jumlah_barang })
 		.then( () =>{
 			dispatch({type: TRANSACTION_SAVE_SUCCESS })
@@ -54,8 +59,10 @@ export const transactionSave = ({ nama_barang, kode_barang, jumlah_barang, uid})
 }
 
 export const transactionDelete = ({ uid }) => {
+	const { currentUser } = firebase.auth();
+	
 	return () => {
-		firebase.database().ref(`bucket/bucket1/${uid}`)
+		firebase.database().ref(`bucket/${currentUser.uid}/${uid}`)
 		.remove()
 		.then( () => {
 			Actions.transactionList({ type: 'reset' });
